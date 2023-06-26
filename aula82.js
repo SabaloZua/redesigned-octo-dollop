@@ -5,11 +5,12 @@
  const txt_qtde=document.querySelector("#txt_qtde")
  const controle=document.querySelector("#controle")
 
+ // pegando a largura do palco
  let largura_palco=palco.offsetWidth;
  let altura_palco=palco.offsetHeight;
  let bolas=[]
  let num_bola=0
-
+// class de bolas
 class Bola{
    constructor(arrybolas,palco){
       this.tam=Math.floor(Math.random()*15)+10
@@ -31,12 +32,13 @@ class Bola{
       num_bola++
       num_objectos.innerHTML=num_bola
    }
+ // função que returna posição da bolinha
    mpos=()=>{
         
       return this.arrybolas.indexOf(this)
    }
 
-   
+   // função que remove a bolinha
    remover=()=>{
          clearInterval(this.controle)
          bolas=bolas.filter((b)=>{
@@ -47,7 +49,7 @@ class Bola{
          num_bola-- 
          num_objectos.innerHTML=num_bola
    }
-
+ // função que desenha a bolinha no DOM
    desenhar=()=>{
       const div=document.createElement('div')
       div.setAttribute("id",this.id)
@@ -56,6 +58,7 @@ class Bola{
       width:${this.tam}px; height:${this.tam}px; background-color:rgb(${this.r},${this.g},${this.b});`)
       this.palco.appendChild(div)
    }
+  // função que verifica se a bolinha colidiu com as extremidades do palco
       colidir=()=>{
          if(this.px+this.tam>=largura_palco){
             this.dirx=-1
@@ -68,6 +71,7 @@ class Bola{
             this.diry=1
          }
       }   
+  // função que controla a movimentação das bolinhas
    controlar1=()=>{
          this.colidir()
       this.px+=this.dirx*this.velx
